@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CityAlert</string>
+    <string name="add_note">Adiciona nota</string>
 </resources>
