@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(snackbarSucess, R.string.note_sucess, Snackbar.LENGTH_SHORT)
                         .show()
 
-                //outras cenas
+                //Cenas
 
             }
         } else {
