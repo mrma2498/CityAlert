@@ -3,4 +3,8 @@
     <string name="app_name">CityAlert</string>
     <string name="add_note" translatable="false">Adicionar Nota</string>
     <string name="save" translatable="false">Guardar</string>
+    <string name="title">Título:</string>
+    <string name="description">Descrição</string>
+    <string name="note_sucess">Nota adicionada com sucesso!</string>
+    <string name="empty_not_saved">\"Titulo vazio: Não foi inserido!\",</string>
 </resources>

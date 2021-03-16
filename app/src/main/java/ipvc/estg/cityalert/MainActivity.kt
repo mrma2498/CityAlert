@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.adapters.NotaAdapter
 import ipvc.estg.cityalert.entities.Nota
 import ipvc.estg.cityalert.viewModel.NotaViewModel
@@ -57,11 +59,16 @@ class MainActivity : AppCompatActivity() {
                 val nota = Nota(titulo = it, descricao = "Teste")
                 noteViewModel.insert(nota)
 
+                //Adiciona snackbar a dizer que a nota foi adicionada com sucesso
+                val snackbarSucess = findViewById<View>(R.id.mainactivity)
+
+                Snackbar.make(snackbarSucess, R.string.note_sucess, Snackbar.LENGTH_SHORT)
+                        .show()
+
             }
         } else {
             Toast.makeText(
-                applicationContext,
-                "Titulo vazio: Não foi inserido!",
+                applicationContext,R.string.empty_not_saved,
                 Toast.LENGTH_LONG).show()
         }
     }
