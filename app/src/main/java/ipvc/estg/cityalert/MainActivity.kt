@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-            //Fab
+            //Abre uma nova atividade para adicionar uma nova nota
         val fab = findViewById<FloatingActionButton>(R.id.fab)
             fab.setOnClickListener {
                 val intent = Intent(this@MainActivity, AdicionaNota::class.java)
