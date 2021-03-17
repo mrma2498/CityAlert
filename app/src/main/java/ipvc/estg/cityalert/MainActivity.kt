@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    /*Insere uma nova atividade na lista das atividades*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
