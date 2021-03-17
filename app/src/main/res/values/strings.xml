@@ -6,4 +6,10 @@
     <string name="description">Description</string>
     <string name="note_sucess">Note added!</string>
     <string name="empty_not_saved">Empty input: Note not added</string>
+    <string name="note_delete">Note deleted!</string>
+    <string name="dialogtitle">Alert</string>
+    <string name="dialogconfirm">Are you sure you want to delete all notes?</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="conf">Yes</string>
 </resources>

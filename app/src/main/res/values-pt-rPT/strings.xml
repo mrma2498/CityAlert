@@ -7,4 +7,10 @@
     <string name="description">Descrição</string>
     <string name="note_sucess">Nota adicionada com sucesso!</string>
     <string name="empty_not_saved">\"Titulo vazio: Não foi inserido!\",</string>
+    <string name="note_delete">Nota eliminada com sucesso!</string>
+    <string name="dialogtitle">Alerta</string>
+    <string name="dialogconfirm">Tem a certeza que pretende eliminar todas as notas?</string>
+    <string name="no">Não</string>
+    <string name="cancel">Cancelar</string>
+    <string name="conf">Sim</string>
 </resources>

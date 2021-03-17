@@ -1,10 +1,7 @@
 package ipvc.estg.cityalert.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import ipvc.estg.cityalert.entities.Nota
 
 @Dao
@@ -18,5 +15,19 @@ interface NotaDao {
 
     @Query("DELETE FROM nota_table")
     suspend fun deleteAll()
+
+    @Delete
+    fun deleteNote(nota: Nota)
+
+
+
+    /*
+    @Query("DELETE FROM nota_table where titulo == :titulo")
+    suspend fun deleteNote(titulo: String)
+*/
+
+
+
+
 
 }

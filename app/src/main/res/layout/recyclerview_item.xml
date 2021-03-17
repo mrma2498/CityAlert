@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:id="@+id/singlenote">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
-            android:layout_margin="10dp"
+            android:layout_marginRight="35dp"
             android:layout_toLeftOf="@id/edit"
             app:srcCompat="@drawable/ic_visibility_grey_18dp"
             tools:ignore="VectorDrawableCompat" />
@@ -33,20 +34,12 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/delete"
-            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
             app:srcCompat="@drawable/ic_create_grey_18dp"
             tools:ignore="VectorDrawableCompat" />
 
-        <ImageView
-            android:id="@+id/delete"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
-            app:srcCompat="@drawable/ic_delete_grey_18dp"
-            tools:ignore="VectorDrawableCompat" />
+
     </RelativeLayout>
 
 </LinearLayout>
