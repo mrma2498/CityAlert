@@ -13,4 +13,6 @@
     <string name="no">Não</string>
     <string name="cancel">Cancelar</string>
     <string name="conf">Sim</string>
+    <string name="mynotes">Notas</string>
+    <string name="createnote">Criar nota</string>
 </resources>
