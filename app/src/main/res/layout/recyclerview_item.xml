@@ -19,6 +19,7 @@
             android:background="@color/white"
             android:padding="10dp" />
 
+
         <ImageView
             android:id="@+id/view"
             android:layout_width="25dp"

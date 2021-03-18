@@ -1,6 +1,7 @@
 package ipvc.estg.cityalert.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +9,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import ipvc.estg.cityalert.AdicionaNota
+import ipvc.estg.cityalert.ConsultaNota
+import ipvc.estg.cityalert.MainActivity
 import ipvc.estg.cityalert.R
 import ipvc.estg.cityalert.entities.Nota
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.add_new_note.view.*
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
 class NotaAdapter (context: Context) : RecyclerView.Adapter<NotaAdapter.NotaViewHolder>() {
 
@@ -22,8 +28,27 @@ class NotaAdapter (context: Context) : RecyclerView.Adapter<NotaAdapter.NotaView
 
     class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notaItemView: TextView = itemView.findViewById(R.id.titulo)
+       // val notaItemView2: TextView = itemView.findViewById(R.id.description)
 
 
+
+        //
+        init {
+            notaItemView.setOnClickListener {
+                /*val position : Int = adapterPosition
+                Toast.makeText(notaItemView.context,"You clicked on number ${position}", Toast.LENGTH_LONG).show()*/
+
+                val titulo = notaItemView.titulo.text
+               // val descricao = notaItemView.description.text //Erro
+
+                val intent = Intent(itemView.context, ConsultaNota::class.java)
+                intent.putExtra("NoteTitle", titulo)
+                //intent.putExtra("NoteDes", descricao)
+                itemView.context.startActivity(intent)
+
+
+            }
+        }
 
     }
 
@@ -38,6 +63,7 @@ class NotaAdapter (context: Context) : RecyclerView.Adapter<NotaAdapter.NotaView
 
 
     }
+
 
 
     internal fun setNotes(notas: MutableList<Nota> ){
