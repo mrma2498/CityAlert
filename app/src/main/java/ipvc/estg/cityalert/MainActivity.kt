@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         /*Eliminar uma nota através de um swipe left*/
         val itemTouchHelperCallback =
                 object :
-                        ItemTouchHelper.SimpleCallback(0,  ItemTouchHelper.LEFT) {
+                        ItemTouchHelper.SimpleCallback(0,  ItemTouchHelper.RIGHT) {
                     override fun onMove(
                             recyclerView: RecyclerView,
                             viewHolder: RecyclerView.ViewHolder,

@@ -19,6 +19,15 @@
             android:background="@color/white"
             android:padding="10dp" />
 
+        <TextView
+            android:id="@+id/des"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_below="@id/titulo"
+            android:padding="10dp"
+            android:visibility="gone"/>
+
 
         <ImageView
             android:id="@+id/view"

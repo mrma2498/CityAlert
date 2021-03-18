@@ -28,7 +28,7 @@ class NotaAdapter (context: Context) : RecyclerView.Adapter<NotaAdapter.NotaView
 
     class NotaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notaItemView: TextView = itemView.findViewById(R.id.titulo)
-       // val notaItemView2: TextView = itemView.findViewById(R.id.description)
+        val desItemView: TextView = itemView.findViewById(R.id.des)
 
 
 
@@ -39,11 +39,11 @@ class NotaAdapter (context: Context) : RecyclerView.Adapter<NotaAdapter.NotaView
                 Toast.makeText(notaItemView.context,"You clicked on number ${position}", Toast.LENGTH_LONG).show()*/
 
                 val titulo = notaItemView.titulo.text
-               // val descricao = notaItemView.description.text //Erro
+                val descricao = desItemView.des.text //Erro //?
 
                 val intent = Intent(itemView.context, ConsultaNota::class.java)
                 intent.putExtra("NoteTitle", titulo)
-                //intent.putExtra("NoteDes", descricao)
+                intent.putExtra("NoteDes", descricao)
                 itemView.context.startActivity(intent)
 
 
@@ -60,6 +60,7 @@ class NotaAdapter (context: Context) : RecyclerView.Adapter<NotaAdapter.NotaView
     override fun onBindViewHolder(holder: NotaViewHolder, position: Int) {
         val current = notas[position]
         holder.notaItemView.text = current.titulo
+        holder.desItemView.text = current.descricao
 
 
     }
