@@ -29,27 +29,6 @@
             android:visibility="gone"/>
 
 
-        <ImageView
-            android:id="@+id/view"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="35dp"
-            android:layout_toLeftOf="@id/edit"
-            app:srcCompat="@drawable/ic_visibility_grey_18dp"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/edit"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="5dp"
-            app:srcCompat="@drawable/ic_create_grey_18dp"
-            tools:ignore="VectorDrawableCompat" />
-
-
     </RelativeLayout>
 
 </LinearLayout>
