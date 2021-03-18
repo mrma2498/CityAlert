@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         /*Eliminar uma nota através de um swipe left*/
         val itemTouchHelperCallback =
                 object :
-                        ItemTouchHelper.SimpleCallback(0,  ItemTouchHelper.LEFT) {
+                        ItemTouchHelper.SimpleCallback(0,  ItemTouchHelper.RIGHT) {
                     override fun onMove(
                             recyclerView: RecyclerView,
                             viewHolder: RecyclerView.ViewHolder,
@@ -116,27 +116,32 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
     /*Insere uma nova atividade na lista das atividades*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == newNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            data?.getStringExtra(AdicionaNota.EXTRA_REPLY)?.let {
-                val nota = Nota(titulo = it, descricao = "Teste")
+
+            val pTitulo = data?.getStringExtra(AdicionaNota.EXTRA_REPLY_TITULO)
+            val pDesc = data?.getStringExtra(AdicionaNota.EXTRA_REPLY_DESCRICAO)
+
+
+            if (pTitulo!= null && pDesc != null) {
+                val nota = Nota(titulo = pTitulo, descricao = pDesc)
                 noteViewModel.insert(nota)
 
                 //Adiciona snackbar a dizer que a nota foi adicionada com sucesso
                 val snackbarSucess = findViewById<View>(R.id.mainactivity)
 
                 Snackbar.make(snackbarSucess, R.string.note_sucess, Snackbar.LENGTH_SHORT)
-                        .show()
-
-
-
+                    .show()
             }
+
         } else {
             Toast.makeText(
-                applicationContext,R.string.empty_not_saved,
+                applicationContext,
+                R.string.empty_not_saved,
                 Toast.LENGTH_LONG).show()
         }
     }
