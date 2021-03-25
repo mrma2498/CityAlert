@@ -20,11 +20,9 @@ interface NotaDao {
     fun deleteNote(nota: Nota)
 
 
+    @Update
+    fun update(nota: Nota)
 
-    /*
-    @Query("DELETE FROM nota_table where titulo == :titulo")
-    suspend fun deleteNote(titulo: String)
-*/
 
 
 

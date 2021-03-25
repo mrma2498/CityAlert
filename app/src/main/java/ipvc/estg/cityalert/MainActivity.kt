@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.adapters.NotaAdapter
 import ipvc.estg.cityalert.entities.Nota
 import ipvc.estg.cityalert.viewModel.NotaViewModel
+import kotlinx.android.synthetic.main.activity_edita_nota.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.measureNanoTime
 
@@ -27,7 +28,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var noteViewModel: NotaViewModel
 
+
     private val newNoteActivityRequestCode = 1
+
+    private val editNoteActivityRequestCode = 2
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +64,9 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, newNoteActivityRequestCode)
 
             }
+
+
+
 
         /*Eliminar uma nota através de um swipe left*/
         val itemTouchHelperCallback =
@@ -114,7 +123,22 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-        }
+
+        adapter.setOnButtonClick(object : NotaAdapter.OnButtonClick {
+
+            override fun Edit(position: Int, title: String, desc: String){
+
+                val intent = Intent(this@MainActivity, EditaNota::class.java)
+                intent.putExtra("id",position)
+                intent.putExtra("titulo", title)
+                intent.putExtra("desc",desc)
+                startActivityForResult(intent,editNoteActivityRequestCode)
+            }
+
+        })
+
+
+    }
 
 
     /*Insere uma nova atividade na lista das atividades*/
@@ -144,7 +168,37 @@ class MainActivity : AppCompatActivity() {
                 R.string.empty_not_saved,
                 Toast.LENGTH_LONG).show()
         }
+
+        if (requestCode == editNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
+
+            val titulo = data?.getStringExtra(EditaNota.EXTRA_REPLY_TITULO)
+            val desc = data?.getStringExtra(EditaNota.EXTRA_REPLY_DESCRICAO)
+            val pos = data?.getIntExtra(EditaNota.EXTRA_REPLY_POSICAO, 0)
+
+
+
+
+            if (titulo!= null && desc != null && pos != null) {
+                val nota = Nota(id = pos, titulo = titulo, descricao = desc)
+                noteViewModel.update(nota)
+
+                //Adiciona snackbar a dizer que a nota foi adicionada com sucesso
+                val snackbarSucess = findViewById<View>(R.id.mainactivity)
+
+                Snackbar.make(snackbarSucess, "Foi alterada com sucesso!", Snackbar.LENGTH_SHORT)
+                        .show()
+            }
+
+        } else {
+            Toast.makeText(
+                    applicationContext,
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_LONG).show()
+        }
+
+
     }
+
 
 }
 

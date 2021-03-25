@@ -23,7 +23,7 @@
         android:fontFamily="sans-serif-light"
         android:inputType="textAutoComplete"
         android:textSize="18sp"
-        android:text="@string/title"
+        android:text=""
         android:layout_toRightOf="@id/title"/>
 
     <TextView
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:inputType="textAutoComplete"
-        android:text="@string/description"
+        android:text=""
         android:textSize="14sp"
         android:layout_below="@id/description"/>
 
