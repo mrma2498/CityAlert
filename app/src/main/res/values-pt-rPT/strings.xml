@@ -15,4 +15,6 @@
     <string name="conf">Sim</string>
     <string name="mynotes">Notas</string>
     <string name="createnote">Criar nota</string>
+    <string name="empty">Valor nulo</string>
+    <string name="editsucess">Nota editada com sucesso!</string>
 </resources>

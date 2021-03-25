@@ -39,12 +39,13 @@ class EditaNota : AppCompatActivity() {
         val tituloEdit = intent.getStringExtra("titulo")
         val descEdit = intent.getStringExtra("desc")
 
-        findViewById<EditText>(R.id.addTitle).setText(tituloEdit)
-        findViewById<EditText>(R.id.addDescription).setText(descEdit)
-
 
         val titulo = findViewById<EditText>(R.id.addTitle)
         val descricao = findViewById<EditText>(R.id.addDescription)
+
+
+        titulo.setText(tituloEdit)
+        descricao.setText(descEdit)
 
 
         val posicao: Int? = intent.getIntExtra("id",0)
@@ -54,8 +55,24 @@ class EditaNota : AppCompatActivity() {
         button.setOnClickListener {
 
             val replyIntent = Intent()
-            if (TextUtils.isEmpty(titulo.text) || TextUtils.isEmpty(titulo.text)){
+            if (TextUtils.isEmpty(titulo.text) || TextUtils.isEmpty(descricao.text)){
                 setResult(Activity.RESULT_CANCELED,replyIntent)
+
+                if (TextUtils.isEmpty(titulo.text) && TextUtils.isEmpty(descricao.text)) {
+                    titulo.error = resources.getString(R.string.empty);
+                    descricao.error = resources.getString(R.string.empty);
+
+                }
+
+                else if (TextUtils.isEmpty(titulo.text)){
+                    titulo.error = resources.getString(R.string.empty);
+                }
+
+                else if (TextUtils.isEmpty(descricao.text)){
+                    descricao.error = resources.getString(R.string.empty);
+                }
+
+
             } else {
 
 
@@ -63,10 +80,9 @@ class EditaNota : AppCompatActivity() {
                 replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, descricao.text.toString())
                 replyIntent.putExtra(EXTRA_REPLY_POSICAO, posicao)
                 setResult(Activity.RESULT_OK, replyIntent)
-
+                finish()
 
             }
-            finish()
 
         }
 

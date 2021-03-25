@@ -162,14 +162,9 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
 
-        } else {
-            Toast.makeText(
-                applicationContext,
-                R.string.empty_not_saved,
-                Toast.LENGTH_LONG).show()
         }
 
-        if (requestCode == editNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
+        else if (requestCode == editNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
 
             val titulo = data?.getStringExtra(EditaNota.EXTRA_REPLY_TITULO)
             val desc = data?.getStringExtra(EditaNota.EXTRA_REPLY_DESCRICAO)
@@ -185,15 +180,10 @@ class MainActivity : AppCompatActivity() {
                 //Adiciona snackbar a dizer que a nota foi adicionada com sucesso
                 val snackbarSucess = findViewById<View>(R.id.mainactivity)
 
-                Snackbar.make(snackbarSucess, "Foi alterada com sucesso!", Snackbar.LENGTH_SHORT)
+                Snackbar.make(snackbarSucess, R.string.editsucess, Snackbar.LENGTH_SHORT)
                         .show()
             }
 
-        } else {
-            Toast.makeText(
-                    applicationContext,
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show()
         }
 
 
