@@ -14,4 +14,6 @@
     <string name="conf">Yes</string>
     <string name="mynotes">Notes</string>
     <string name="createnote">New note</string>
+    <string name="empty">Empty</string>
+    <string name="editsucess">Note edited successfully!</string>
 </resources>

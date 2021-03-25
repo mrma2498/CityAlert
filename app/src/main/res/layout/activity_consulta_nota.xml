@@ -37,12 +37,4 @@
         android:layout_below="@id/titleNote"/>
 
 
-
-
-
-
-
-
-
-
 </RelativeLayout>

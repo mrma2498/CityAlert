@@ -9,11 +9,15 @@
         android:roundIcon="@mipmap/ic_cityalert_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CityAlert">
-        <activity android:name=".AdicionaNota"
-            android:label="@string/add_note"></activity>
-        <activity android:name=".MainActivity" >
+        <activity android:name=".EditaNota"></activity>
+        <activity android:name=".ConsultaNota" />
+        <activity
+            android:name=".AdicionaNota"
+            android:label="@string/add_note" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
