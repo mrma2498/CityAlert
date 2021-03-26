@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        /*Eliminar uma nota através de um swipe left*/
+        /*Eliminar uma nota através de um swipe right*/
         val itemTouchHelperCallback =
                 object :
                         ItemTouchHelper.SimpleCallback(0,  ItemTouchHelper.RIGHT) {
