@@ -17,4 +17,6 @@
     <string name="createnote">Criar nota</string>
     <string name="empty">Valor nulo</string>
     <string name="editsucess">Nota editada com sucesso!</string>
+    <string name="loginB">Autenticação</string>
+    <string name="notes">Notas</string>
 </resources>
