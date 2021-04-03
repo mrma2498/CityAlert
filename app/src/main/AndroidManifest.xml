@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ipvc.estg.cityalert">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_cityalert"
@@ -9,21 +11,20 @@
         android:roundIcon="@mipmap/ic_cityalert_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CityAlert">
+        <activity android:name=".Login"></activity>
         <activity android:name=".PaginaInicial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".EditaNota" />
         <activity android:name=".ConsultaNota" />
         <activity
             android:name=".AdicionaNota"
             android:label="@string/add_note" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
