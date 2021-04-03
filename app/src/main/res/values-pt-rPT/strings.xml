@@ -19,4 +19,6 @@
     <string name="editsucess">Nota editada com sucesso!</string>
     <string name="loginB">Autenticação</string>
     <string name="notes">Notas</string>
+    <string name="username">"Utilizador: "</string>
+    <string name="password">Palavra-passe:</string>
 </resources>

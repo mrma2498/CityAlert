@@ -24,7 +24,7 @@
         <activity
             android:name=".AdicionaNota"
             android:label="@string/add_note" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

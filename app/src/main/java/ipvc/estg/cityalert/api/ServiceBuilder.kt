@@ -10,7 +10,7 @@ object ServiceBuilder {
     private val client = OkHttpClient.Builder().build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://jsonplaceholder.typicode.com/") //Alterar para o url do webhost
+        .baseUrl("https://cityalertcm.000webhostapp.com/") //Alterar para o url do webhost
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
