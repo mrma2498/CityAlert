@@ -1,14 +1,17 @@
 package ipvc.estg.cityalert
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_pagina_inicial.*
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import ipvc.estg.cityalert.entities.Nota
+
 
 class PaginaInicial : AppCompatActivity() {
 
@@ -30,7 +33,7 @@ class PaginaInicial : AppCompatActivity() {
 
             if (sharedPref.contains("isUserLogged")){
                 //Mandar para a página inicial
-                val intent = Intent(this, Perfil::class.java)
+                val intent = Intent(this, PerfilUtilizador::class.java)
                 startActivityForResult(intent, PERFILActivityRequestCode)
 
                 Log.d("SHAREDPREFENCES3", "Send to main page")

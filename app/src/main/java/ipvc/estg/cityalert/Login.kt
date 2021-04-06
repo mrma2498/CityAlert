@@ -13,6 +13,7 @@ import ipvc.estg.cityalert.api.EndPoints
 import ipvc.estg.cityalert.api.ServiceBuilder
 import ipvc.estg.cityalert.api.Utilizador
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,8 +81,9 @@ class Login : AppCompatActivity() {
                         Log.d("SHAREDPREFENCES2", "Read $isUserLogin")
 
 
-                        val intent = Intent(this@Login, Perfil::class.java)
+                        val intent = Intent(this@Login, PerfilUtilizador::class.java)
                         startActivityForResult(intent, PERFILActivityRequestCode)
+
 
                     }
 

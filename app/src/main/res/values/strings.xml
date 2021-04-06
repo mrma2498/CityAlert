@@ -22,4 +22,5 @@
     <string name="password">Password:</string>
     <string name="loginfail">Username or password wrong. Try again!</string>
     <string name="logout">Logout successful!</string>
+    <string name="title_activity_perfil_utilizador">Map</string>
 </resources>
