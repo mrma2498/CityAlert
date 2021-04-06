@@ -21,4 +21,6 @@
     <string name="notes">Notas</string>
     <string name="username">"Utilizador: "</string>
     <string name="password">Palavra-passe:</string>
+    <string name="loginfail">Nome ou palavra-passe errada. Tenta outra vez!</string>
+    <string name="logout">Logout realizado com sucesso!</string>
 </resources>

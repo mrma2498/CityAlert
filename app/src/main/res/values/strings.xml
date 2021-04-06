@@ -20,4 +20,6 @@
     <string name="notes">Notes</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>
+    <string name="loginfail">Username or password wrong. Try again!</string>
+    <string name="logout">Logout successful!</string>
 </resources>

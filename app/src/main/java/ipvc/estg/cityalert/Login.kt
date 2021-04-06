@@ -1,5 +1,8 @@
 package ipvc.estg.cityalert
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +16,24 @@ import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 import kotlin.math.log
 
 
 class Login : AppCompatActivity() {
+
+    private val PERFILActivityRequestCode = 5
+    private val PaginaINICIAL = 6
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+        val sharedPref: SharedPreferences = getSharedPreferences("login",Context.MODE_PRIVATE)
+
+        val isUserLogin = sharedPref.getBoolean("isUserLogged",false)
+        //Log.d("SHAREDPREFENCES", "Read $isUserLogged")
 
 
         loginAccount.setOnClickListener {
@@ -49,46 +63,53 @@ class Login : AppCompatActivity() {
                 override fun onResponse(call: Call<Utilizador>, response: Response<Utilizador>) {
                     if (response.isSuccessful) {
                         val c: Utilizador = response.body()!!
-                        Log.d("CREATE","Funcionou!")
-                        Toast.makeText(this@Login, c.username, Toast.LENGTH_SHORT).show()
+
+                        //Mostrar snackbar do login realizado com sucesso
+                       /*
                         val snackbarSucess = findViewById<View>(R.id.loginpage)
 
-                        Snackbar.make(snackbarSucess, "Login com sucesso!", Snackbar.LENGTH_SHORT)
-                                .show()
+                        Snackbar.make(snackbarSucess, "Bem-vindo " + c.username, Snackbar.LENGTH_SHORT)
+                                .show()*/
+
+                        val sharedPref: SharedPreferences = getSharedPreferences("login",Context.MODE_PRIVATE)
+                        with(sharedPref.edit()){
+                            putBoolean("isUserLogged", true);
+                            commit()
+                        }
+
+                        Log.d("SHAREDPREFENCES2", "Read $isUserLogin")
+
+
+                        val intent = Intent(this@Login, Perfil::class.java)
+                        startActivityForResult(intent, PERFILActivityRequestCode)
+
                     }
+
+
 
                 }
 
                 override fun onFailure(call: Call<Utilizador>, t: Throwable) {
-                    Toast.makeText(this@Login, "Falhou", Toast.LENGTH_SHORT).show()
+
+
+                    val snackbarFail = findViewById<View>(R.id.loginpage)
+
+                    Snackbar.make(snackbarFail, R.string.loginfail, Snackbar.LENGTH_SHORT)
+                            .show()
 
                     Log.d("fail","Falhou!")
                     Log.d("fail",t.message.toString())
+
                 }
             })
 
         }
 
-    }
+        backMenu.setOnClickListener {
+            val intent = Intent(this@Login, PaginaInicial::class.java)
+            startActivityForResult(intent, PaginaINICIAL)
+        }
 
-    fun getSingle(view: View){
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getUtilizadorById(1);
-
-        call.enqueue(object : Callback<Utilizador> {
-            override fun onResponse(call: Call<Utilizador>, response: Response<Utilizador>) {
-                if (response.isSuccessful) {
-                    val c: Utilizador = response.body()!!
-                    Toast.makeText(this@Login, c.username, Toast.LENGTH_SHORT).show()
-
-
-                }
-            }
-
-            override fun onFailure(call: Call<Utilizador>, t: Throwable) {
-                Toast.makeText(this@Login, "Falhou", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 
 
