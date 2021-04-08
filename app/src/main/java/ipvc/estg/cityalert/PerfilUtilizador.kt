@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,13 +14,22 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
+import ipvc.estg.cityalert.api.EndPoints
+import ipvc.estg.cityalert.api.Irregularidade
+import ipvc.estg.cityalert.api.ServiceBuilder
+import ipvc.estg.cityalert.api.Utilizador
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_perfil_utilizador.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private val PaginaINICIAL = 6
+    private lateinit var irregularidades: List<Irregularidade>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +45,17 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
 
 
+        /**
+         * Fab para adicionar uma nova irregularidade.
+         * */
         fabAdd.setOnClickListener {
             Log.d("NOTICE","Adicionar irregularidade")
         }
 
 
-
+        /**
+         * Bottom Navigation com as opções de logout, voltar atrás e procurar.
+         * */
         bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.backMenu -> {
@@ -68,6 +83,35 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+        /**
+         * Introduz no mapa todas as irregularidades provenientes do WS.
+         * */
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getIrregularidades()
+        var position: LatLng
+
+        call.enqueue(object : Callback<List<Irregularidade>> {
+
+
+            override fun onResponse(call: Call<List<Irregularidade>>, response: Response<List<Irregularidade>>) {
+               if(response.isSuccessful){
+                   irregularidades = response.body()!!
+                   for (ir in irregularidades){
+                       position = LatLng(ir.latitude,ir.longitude)
+                       mMap.addMarker(MarkerOptions().position(position).title(ir.nome))
+                   }
+               }
+            }
+
+            override fun onFailure(call: Call<List<Irregularidade>>, t: Throwable) {
+                Log.d("ERRO", "Erro ao carregar irregularidades")
+            }
+
+
+        })
+
+
+
     }
 
 
@@ -85,8 +129,16 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val portugal = LatLng(39.557191, -7.8536599)
+
+        //mMap.addMarker(MarkerOptions().position(portugal).title("Marker in Portugal"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
     }
+
+
+
+
+
+
+
 }
