@@ -137,8 +137,4 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-
-
-
-
 }
