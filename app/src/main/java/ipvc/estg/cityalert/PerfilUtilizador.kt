@@ -7,12 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.api.EndPoints
@@ -25,7 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
+class PerfilUtilizador : AppCompatActivity(), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback{
 
     private lateinit var mMap: GoogleMap
     private val PaginaINICIAL = 6
@@ -99,6 +101,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                    for (ir in irregularidades){
                        position = LatLng(ir.latitude,ir.longitude)
                        mMap.addMarker(MarkerOptions().position(position).title(ir.nome))
+
+
                    }
                }
             }
@@ -133,8 +137,20 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
         //mMap.addMarker(MarkerOptions().position(portugal).title("Marker in Portugal"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
+
+        //Detalhes
+        mMap.setOnInfoWindowClickListener(this@PerfilUtilizador)
+    }
+
+    override fun onInfoWindowClick(p0: Marker?) {
+        for (ir in irregularidades){
+            Toast.makeText(
+                    this, ir.descricao,
+                    Toast.LENGTH_SHORT
+            ).show()
+            Log.d("Mostra",ir.descricao)
+        }
     }
 
 
-//Teste subbranch a funcionar
 }
