@@ -3,11 +3,10 @@ package ipvc.estg.cityalert
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,8 +17,6 @@ import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.api.EndPoints
 import ipvc.estg.cityalert.api.Irregularidade
 import ipvc.estg.cityalert.api.ServiceBuilder
-import ipvc.estg.cityalert.api.Utilizador
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_perfil_utilizador.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,6 +27,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private val PaginaINICIAL = 6
     private lateinit var irregularidades: List<Irregularidade>
+    private val NotesRequestActivity = 9
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,48 +38,33 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        bottomNavigationView.background = null
-        bottomNavigationView.menu.getItem(2).isEnabled = false
+
 
 
 
         /**
-         * Fab para adicionar uma nova irregularidade.
+         * Fab para redirecionar para o menu das notas.
          * */
-        fabAdd.setOnClickListener {
-            Log.d("NOTICE","Adicionar irregularidade")
+        notasButton.setOnClickListener {
+            val intent = Intent(this@PerfilUtilizador, MainActivity::class.java)
+            startActivityForResult(intent,NotesRequestActivity)
         }
 
-
         /**
-         * Bottom Navigation com as opções de logout, voltar atrás e procurar.
+         * Fab para fazer logout da conta.
          * */
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when(menuItem.itemId) {
-                R.id.backMenu -> {
-                    // Respond to navigation item 1 click
-                    val intent = Intent(this@PerfilUtilizador, PaginaInicial::class.java)
-                    startActivityForResult(intent, PaginaINICIAL)
-                    true
-                }
-
-
-                R.id.logoutButton -> {
-                    // Respond to navigation item 3 click
-                    val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
-                    with(sharedPref.edit()){
-                        remove("isUserLogged")
-                        commit()
-                    }
-
-                    val intent = Intent(this@PerfilUtilizador, PaginaInicial::class.java)
-                    startActivityForResult(intent, PaginaINICIAL)
-                    true
-                }
-
-                else -> false
+        logoutButton.setOnClickListener {
+            val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
+            with(sharedPref.edit()){
+                remove("isUserLogged")
+                commit()
             }
+
+            val intent = Intent(this@PerfilUtilizador, PaginaInicial::class.java)
+            startActivityForResult(intent, PaginaINICIAL)
         }
+
+
 
         /**
          * Introduz no mapa todas as irregularidades provenientes do WS.
@@ -135,6 +118,12 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
     }
 
+    override fun onBackPressed() {
 
+        val snackbarBack = findViewById<View>(R.id.perfilutilizador)
+        Snackbar.make(snackbarBack, "Faz logout", Snackbar.LENGTH_SHORT) //Criar string
+            .show()
+    }
 
 }
+

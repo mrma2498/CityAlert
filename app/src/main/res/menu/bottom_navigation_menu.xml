@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:id="@+id/miHome"
+    <item android:id="@+id/home"
         android:title="Home"
         android:icon="@drawable/ic_home_black_24dp" />
 
     <item
-        android:id="@+id/backMenu"
+        android:id="@+id/notasButton"
         android:enabled="true"
-        android:icon="@drawable/ic_arrow_back_white_24dp"
-        android:title="Item Menu"/>
+        android:icon="@drawable/ic_description_white_24dp"
+        android:title="Notes"/>
 
 
     <item android:id="@+id/placeholder"

@@ -85,7 +85,7 @@
         android:id="@+id/backMenu"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Main Meny"
+        android:text="Main Menu"
         android:backgroundTint="#FCA656"
         android:layout_below="@+id/loginAccount"
         android:layout_centerInParent="true"
