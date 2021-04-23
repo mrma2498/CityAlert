@@ -121,7 +121,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
     override fun onBackPressed() {
 
         val snackbarBack = findViewById<View>(R.id.perfilutilizador)
-        Snackbar.make(snackbarBack, "Faz logout", Snackbar.LENGTH_SHORT) //Criar string
+        Snackbar.make(snackbarBack, "You have to logout!", Snackbar.LENGTH_SHORT) //Criar string
             .show()
     }
 

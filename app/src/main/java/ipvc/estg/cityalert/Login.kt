@@ -107,10 +107,6 @@ class Login : AppCompatActivity() {
 
         }
 
-        backMenu.setOnClickListener {
-            val intent = Intent(this@Login, PaginaInicial::class.java)
-            startActivityForResult(intent, PaginaINICIAL)
-        }
 
     }
 

@@ -9,16 +9,6 @@
     android:id="@+id/paginaInicial">
 
 
-    <TextView
-        android:id="@+id/appname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="CityAlert"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/cityAlertImage"
@@ -27,8 +17,7 @@
         android:layout_centerHorizontal="true"
         android:scaleX="2.5"
         android:scaleY="2.5"
-        android:layout_below="@id/appname"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         app:srcCompat="@mipmap/ic_cityalert_foreground" />
 
     <Button

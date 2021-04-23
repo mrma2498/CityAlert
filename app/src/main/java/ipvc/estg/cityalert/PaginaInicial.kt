@@ -55,7 +55,7 @@ class PaginaInicial : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-       //Do nothing
+       //Overrides method
     }
 
 
