@@ -63,14 +63,7 @@ class Login : AppCompatActivity() {
 
                 override fun onResponse(call: Call<Utilizador>, response: Response<Utilizador>) {
                     if (response.isSuccessful) {
-                        val c: Utilizador = response.body()!!
-
-                        //Mostrar snackbar do login realizado com sucesso
-                       /*
-                        val snackbarSucess = findViewById<View>(R.id.loginpage)
-
-                        Snackbar.make(snackbarSucess, "Bem-vindo " + c.username, Snackbar.LENGTH_SHORT)
-                                .show()*/
+                        val c: Utilizador = response.body()!! //obter id do utilizador e colocar no shared preferences
 
                         val sharedPref: SharedPreferences = getSharedPreferences("login",Context.MODE_PRIVATE)
                         with(sharedPref.edit()){

@@ -81,7 +81,11 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                    irregularidades = response.body()!!
                    for (ir in irregularidades){
                        position = LatLng(ir.latitude,ir.longitude)
+
+                       //if (utilizadorLogado(passado através do shared preferences) == ir.idutilizador)
                        mMap.addMarker(MarkerOptions().position(position).title(ir.nome))
+                       //cor verde
+                       //else vermelho
                    }
                }
             }

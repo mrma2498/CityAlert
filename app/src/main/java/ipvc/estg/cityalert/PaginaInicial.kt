@@ -19,29 +19,36 @@ class PaginaInicial : AppCompatActivity() {
     private val LOGINActivityRequestCode = 4
     private val PERFILActivityRequestCode = 5
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+        //Confirmar se é no onCreate onde se faz login automático.
+        val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+
+
+        if (sharedPref.contains("isUserLogged")){
+            //Mandar para a página inicial
+            val intent = Intent(this, PerfilUtilizador::class.java)
+            startActivityForResult(intent, PERFILActivityRequestCode)
+
+            //Log.d("SHAREDPREFENCES3", "Send to main page")
+        }
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagina_inicial)
 
-
-
         val login = findViewById<Button>(R.id.loginB)
 
-        val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
 
         login.setOnClickListener {
 
-            if (sharedPref.contains("isUserLogged")){
-                //Mandar para a página inicial
-                val intent = Intent(this, PerfilUtilizador::class.java)
-                startActivityForResult(intent, PERFILActivityRequestCode)
-
-                Log.d("SHAREDPREFENCES3", "Send to main page")
-            }
-            else {
                 val intent = Intent(this, Login::class.java)
                 startActivityForResult(intent, LOGINActivityRequestCode)
-            }
+
         }
 
         val notes = findViewById<Button>(R.id.notespage)
