@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
@@ -57,6 +58,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
             val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
             with(sharedPref.edit()){
                 remove("isUserLogged")
+                remove("idUti")
                 commit()
             }
 
@@ -72,6 +74,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getIrregularidades()
         var position: LatLng
+        var idUtilizadorIrr: Int
 
         call.enqueue(object : Callback<List<Irregularidade>> {
 
@@ -81,9 +84,10 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                    irregularidades = response.body()!!
                    for (ir in irregularidades){
                        position = LatLng(ir.latitude,ir.longitude)
+                       idUtilizadorIrr = ir.id_utilizador;
 
                        //if (utilizadorLogado(passado através do shared preferences) == ir.idutilizador)
-                       mMap.addMarker(MarkerOptions().position(position).title(ir.nome))
+                       mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome))
                        //cor verde
                        //else vermelho
                    }

@@ -34,6 +34,7 @@ class Login : AppCompatActivity() {
         val sharedPref: SharedPreferences = getSharedPreferences("login",Context.MODE_PRIVATE)
 
         val isUserLogin = sharedPref.getBoolean("isUserLogged",false)
+        var id_utilizador = sharedPref.getInt("idUti",0)
         //Log.d("SHAREDPREFENCES", "Read $isUserLogged")
 
 
@@ -68,17 +69,18 @@ class Login : AppCompatActivity() {
                         val sharedPref: SharedPreferences = getSharedPreferences("login",Context.MODE_PRIVATE)
                         with(sharedPref.edit()){
                             putBoolean("isUserLogged", true);
+                            putInt("idUti",c.id);
                             commit()
                         }
 
-                        Log.d("SHAREDPREFENCES2", "Read $isUserLogin")
+
 
 
                         val intent = Intent(this@Login, PerfilUtilizador::class.java)
                         startActivityForResult(intent, PERFILActivityRequestCode)
 
 
-                    }
+                    } 
 
 
 
