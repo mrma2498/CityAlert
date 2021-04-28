@@ -41,7 +41,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-
+        val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
 
         /**
          * Fab para redirecionar para o menu das notas.
@@ -55,7 +55,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
          * Fab para fazer logout da conta.
          * */
         logoutButton.setOnClickListener {
-            val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
+
             with(sharedPref.edit()){
                 remove("isUserLogged")
                 remove("idUti")
@@ -74,7 +74,15 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getIrregularidades()
         var position: LatLng
+
+        /**Guarda a id do utilizador que registou a irregularidade*/
         var idUtilizadorIrr: Int
+
+
+
+        /**Obtém o valor da ID do utilizador autenticado*/
+        var idLogin = sharedPref.getInt("idUti",0);
+
 
         call.enqueue(object : Callback<List<Irregularidade>> {
 
@@ -85,11 +93,15 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                    for (ir in irregularidades){
                        position = LatLng(ir.latitude,ir.longitude)
                        idUtilizadorIrr = ir.id_utilizador;
+                       //Log.d("MARIA","$idUtilizadorIrr e $idLogin");
 
-                       //if (utilizadorLogado(passado através do shared preferences) == ir.idutilizador)
-                       mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome))
-                       //cor verde
-                       //else vermelho
+                       if (idLogin == idUtilizadorIrr){
+                           mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome))
+                       }
+                       else {
+                           mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(ir.nome))
+                       }
+
                    }
                }
             }
