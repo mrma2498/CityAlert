@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.api.EndPoints
@@ -23,7 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
+class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var mMap: GoogleMap
     private val PaginaINICIAL = 6
@@ -40,7 +42,6 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
 
-
         val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE)
 
         /**
@@ -48,7 +49,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
          * */
         notasButton.setOnClickListener {
             val intent = Intent(this@PerfilUtilizador, MainActivity::class.java)
-            startActivityForResult(intent,NotesRequestActivity)
+            startActivityForResult(intent, NotesRequestActivity)
         }
 
         /**
@@ -56,7 +57,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
          * */
         logoutButton.setOnClickListener {
 
-            with(sharedPref.edit()){
+            with(sharedPref.edit()) {
                 remove("isUserLogged")
                 remove("idUti")
                 commit()
@@ -65,7 +66,6 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(this@PerfilUtilizador, PaginaInicial::class.java)
             startActivityForResult(intent, PaginaINICIAL)
         }
-
 
 
         /**
@@ -79,31 +79,31 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         var idUtilizadorIrr: Int
 
 
-
         /**Obtém o valor da ID do utilizador autenticado*/
-        var idLogin = sharedPref.getInt("idUti",0);
+        var idLogin = sharedPref.getInt("idUti", 0);
 
 
         call.enqueue(object : Callback<List<Irregularidade>> {
 
 
             override fun onResponse(call: Call<List<Irregularidade>>, response: Response<List<Irregularidade>>) {
-               if(response.isSuccessful){
-                   irregularidades = response.body()!!
-                   for (ir in irregularidades){
-                       position = LatLng(ir.latitude,ir.longitude)
-                       idUtilizadorIrr = ir.id_utilizador;
-                       //Log.d("MARIA","$idUtilizadorIrr e $idLogin");
+                if (response.isSuccessful) {
+                    irregularidades = response.body()!!
+                    for (ir in irregularidades) {
+                        position = LatLng(ir.latitude, ir.longitude)
+                        idUtilizadorIrr = ir.id_utilizador;
+                        //Log.d("MARIA","$idUtilizadorIrr e $idLogin");
 
-                       if (idLogin == idUtilizadorIrr){
-                           mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome))
-                       }
-                       else {
-                           mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(ir.nome))
-                       }
+                        var info = "Descrição: " + ir.descricao + "\n" + "Tipo: " + ir.tipo + "\n" + "ID_Utilizador: " + ir.id_utilizador
 
-                   }
-               }
+                        if (idLogin == idUtilizadorIrr) {
+                            mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome).snippet("Descrição: " + ir.descricao + "Tipo:" + ir.tipo + "ID_Utilizador: " + ir.id_utilizador))
+                        } else {
+                            mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(ir.nome).snippet(info))
+                        }
+
+                    }
+                }
             }
 
             override fun onFailure(call: Call<List<Irregularidade>>, t: Throwable) {
@@ -114,9 +114,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         })
 
 
-
     }
-
 
 
     /**
@@ -136,14 +134,31 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
         //mMap.addMarker(MarkerOptions().position(portugal).title("Marker in Portugal"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
+        googleMap.setOnInfoWindowClickListener(this)
+
     }
 
     override fun onBackPressed() {
 
         val snackbarBack = findViewById<View>(R.id.perfilutilizador)
         Snackbar.make(snackbarBack, "You have to logout!", Snackbar.LENGTH_SHORT) //Criar string
-            .show()
+                .show()
     }
+
+    override fun onInfoWindowClick(p0: Marker?) {
+
+        if (p0 != null) {
+            if (p0.isInfoWindowShown()) {
+                p0.hideInfoWindow();
+            } else {
+                p0.showInfoWindow();
+            }
+        } else {
+            Log.d("MARIA", "cenas")
+        }
+    }
+
+
 
 }
 
