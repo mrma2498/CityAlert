@@ -8,6 +8,7 @@ data class Irregularidade (
     val tipo: String,
     val latitude: Double,
     val longitude: Double,
+    val image_url: String,
     val id_utilizador: Int
 
 )

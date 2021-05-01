@@ -94,7 +94,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                         idUtilizadorIrr = ir.id_utilizador;
                         //Log.d("MARIA","$idUtilizadorIrr e $idLogin");
 
-                        var info = "Descrição: " + ir.descricao + "\n" + "Tipo: " + ir.tipo + "\n" + "ID_Utilizador: " + ir.id_utilizador
+                        var info = "Descrição: " + ir.descricao + "\n" + "Tipo: " + ir.tipo + "\n" + "ID_Utilizador: " + ir.id_utilizador + "\n" + ir.image_url
 
                         if (idLogin == idUtilizadorIrr) {
                             mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome).snippet(info))
