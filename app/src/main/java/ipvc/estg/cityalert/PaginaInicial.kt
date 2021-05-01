@@ -25,7 +25,7 @@ class PaginaInicial : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
-        //Confirmar se é no onCreate onde se faz login automático.
+
         val sharedPref: SharedPreferences = getSharedPreferences("login", Context.MODE_PRIVATE);
 
 

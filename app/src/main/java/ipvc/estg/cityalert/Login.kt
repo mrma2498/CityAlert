@@ -44,13 +44,13 @@ class Login : AppCompatActivity() {
 
 
             if (username.isEmpty()){
-                editTextUsername.error="Username required"
+                editTextUsername.error="Username required" //Adicionar string
                 editTextUsername.requestFocus()
                 return@setOnClickListener
             }
 
             if (password.isEmpty()){
-                editTextPassword.error="Password required"
+                editTextPassword.error="Password required" //Adicionar string
                 editTextPassword.requestFocus()
                 return@setOnClickListener
             }
@@ -64,7 +64,7 @@ class Login : AppCompatActivity() {
 
                 override fun onResponse(call: Call<Utilizador>, response: Response<Utilizador>) {
                     if (response.isSuccessful) {
-                        val c: Utilizador = response.body()!! //obter id do utilizador e colocar no shared preferences
+                        val c: Utilizador = response.body()!!
 
                         val sharedPref: SharedPreferences = getSharedPreferences("login",Context.MODE_PRIVATE)
                         with(sharedPref.edit()){

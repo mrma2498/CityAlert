@@ -25,7 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInfoWindowClickListener {
+class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private val PaginaINICIAL = 6
@@ -97,7 +97,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInf
                         var info = "Descrição: " + ir.descricao + "\n" + "Tipo: " + ir.tipo + "\n" + "ID_Utilizador: " + ir.id_utilizador
 
                         if (idLogin == idUtilizadorIrr) {
-                            mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome).snippet("Descrição: " + ir.descricao + "Tipo:" + ir.tipo + "ID_Utilizador: " + ir.id_utilizador))
+                            mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome).snippet(info))
                         } else {
                             mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)).title(ir.nome).snippet(info))
                         }
@@ -134,8 +134,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInf
 
         //mMap.addMarker(MarkerOptions().position(portugal).title("Marker in Portugal"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
-        googleMap.setOnInfoWindowClickListener(this)
-
+        //googleMap.setOnInfoWindowClickListener(this)
+        mMap.setInfoWindowAdapter(InfoWindowAdapter(this))
     }
 
     override fun onBackPressed() {
@@ -145,6 +145,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInf
                 .show()
     }
 
+    /*
     override fun onInfoWindowClick(p0: Marker?) {
 
         if (p0 != null) {
@@ -156,7 +157,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnInf
         } else {
             Log.d("MARIA", "cenas")
         }
-    }
+    }*/
 
 
 
