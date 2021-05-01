@@ -67,6 +67,15 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
             startActivityForResult(intent, PaginaINICIAL)
         }
 
+        /**
+         * Fab para adicionar nova irregularidade.
+         * */
+
+        novaButton.setOnClickListener(){
+            //val intent = Intent(this@PerfilUtilizador, CriarIrregularidade::class.java)
+            //startActivityForResult(intent, NotesRequestActivity)
+        }
+
 
         /**
          * Introduz no mapa todas as irregularidades provenientes do WS.

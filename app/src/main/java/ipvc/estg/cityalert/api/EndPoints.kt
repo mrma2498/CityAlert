@@ -13,6 +13,20 @@ interface EndPoints {
             @Field("username") username: String,
             @Field("password") password: String): Call<Utilizador>
 
+
+    /**Adiciona uma nova irregularidade à BD*/
+    @FormUrlEncoded
+    @POST("myslim/api/addIrregularidade")
+    fun adicionaIrregularidade(
+        @Field("nome") nome: String,
+        @Field("descricao") descricao: String,
+        @Field("tipo") tipo: String,
+        @Field("latitude") latitude: Double,
+        @Field("longitude") longitude: Double,
+        @Field("image_url") image_url: String,
+        @Field("id_utilizador") id_utilizador: Int): Call<Irregularidade>
+
+
     @GET("myslim/api/irregularidades")
     fun getIrregularidades(): Call<List<Irregularidade>>
 
