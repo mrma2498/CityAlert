@@ -23,4 +23,9 @@
     <string name="password">Palavra-passe:</string>
     <string name="loginfail">Nome ou palavra-passe errada. Tenta outra vez!</string>
     <string name="logout">Logout realizado com sucesso!</string>
+    <string name="title_activity_perfil_utilizador">Mapa</string>
+    <string name="nomeIr">Nome:</string>
+    <string name="type">Tipo:</string>
+    <string name="create">Criar</string>
+    <string name="upload">Carregar Imagem</string>
 </resources>

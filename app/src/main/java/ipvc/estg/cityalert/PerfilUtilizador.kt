@@ -31,6 +31,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
     private val PaginaINICIAL = 6
     private lateinit var irregularidades: List<Irregularidade>
     private val NotesRequestActivity = 9
+    private val NovaIrregularidadeRequestActivity = 10
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,8 +73,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
          * */
 
         novaButton.setOnClickListener(){
-            //val intent = Intent(this@PerfilUtilizador, CriarIrregularidade::class.java)
-            //startActivityForResult(intent, NotesRequestActivity)
+            val intent = Intent(this@PerfilUtilizador, CriarIrregularidade::class.java)
+            startActivityForResult(intent, NovaIrregularidadeRequestActivity)
         }
 
 

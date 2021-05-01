@@ -23,4 +23,8 @@
     <string name="loginfail">Username or password wrong. Try again!</string>
     <string name="logout">Logout successful!</string>
     <string name="title_activity_perfil_utilizador">Map</string>
+    <string name="nomeIr">Name:</string>
+    <string name="type">Type:</string>
+    <string name="create">Add</string>
+    <string name="upload">Upload Image</string>
 </resources>
