@@ -23,7 +23,7 @@ interface EndPoints {
         @Field("tipo") tipo: String,
         @Field("latitude") latitude: Double,
         @Field("longitude") longitude: Double,
-        @Field("image_url") image_url: String,
+        //@Field("image_url") image_url: String,
         @Field("id_utilizador") id_utilizador: Int): Call<Irregularidade>
 
 

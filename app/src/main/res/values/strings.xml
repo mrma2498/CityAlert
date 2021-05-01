@@ -27,4 +27,5 @@
     <string name="type">Type:</string>
     <string name="create">Add</string>
     <string name="upload">Upload Image</string>
+    <string name="cords">Coordinates:</string>
 </resources>

@@ -8,7 +8,8 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,7 @@
         android:theme="@style/Theme.CityAlert"
         android:usesCleartextTraffic="true">
         <activity android:name=".CriarIrregularidade"></activity>
-        <activity android:name=".teste" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -35,7 +36,7 @@
         <activity
             android:name=".PerfilUtilizador"
             android:label="@string/title_activity_perfil_utilizador" />
-        <activity android:name=".Perfil" />
+
         <activity android:name=".Login" />
         <activity android:name=".PaginaInicial">
             <intent-filter>
