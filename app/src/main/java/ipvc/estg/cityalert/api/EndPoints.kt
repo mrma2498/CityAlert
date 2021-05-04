@@ -30,5 +30,9 @@ interface EndPoints {
     @GET("myslim/api/irregularidades")
     fun getIrregularidades(): Call<List<Irregularidade>>
 
+    @FormUrlEncoded
+    @POST("myslim/api/delete")
+    fun eliminaIrregularidade(
+        @Field("id") id: Int): Call<EliminarIrr>
 
 }

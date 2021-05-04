@@ -146,6 +146,7 @@ class CriarIrregularidade : AppCompatActivity() {
             call.enqueue(object : Callback<Irregularidade> {
 
                 override fun onResponse(call: Call<Irregularidade>, response: Response<Irregularidade>) {
+                    //Adicionar mandar para atividade para o mapa
                     if (response.isSuccessful) {
 
                         val snackbarSuccess = findViewById<View>(R.id.criarirregularidade)
@@ -153,6 +154,9 @@ class CriarIrregularidade : AppCompatActivity() {
                         Snackbar.make(snackbarSuccess, "Adicionado com sucessso!", Snackbar.LENGTH_SHORT)
                             .show()
 
+                        //Adicionar temporizador para dar tempo para ver o adicionado com sucesso
+                        finish()
+                        //Recarregar mapa
                     }
                 }
 
