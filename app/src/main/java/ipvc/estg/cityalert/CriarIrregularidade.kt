@@ -7,23 +7,21 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
-import android.util.Base64.encodeToString
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.api.EndPoints
 import ipvc.estg.cityalert.api.Irregularidade
 import ipvc.estg.cityalert.api.ServiceBuilder
-import ipvc.estg.cityalert.api.Utilizador
 import kotlinx.android.synthetic.main.activity_criar_irregularidade.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +29,10 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+
+
+import android.util.Base64
+import com.google.android.gms.common.api.GoogleApiClient
 
 
 class CriarIrregularidade : AppCompatActivity() {
@@ -53,6 +54,8 @@ class CriarIrregularidade : AppCompatActivity() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
 
+    var imagem64 = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_criar_irregularidade)
@@ -66,6 +69,7 @@ class CriarIrregularidade : AppCompatActivity() {
 
         var latitude = 0.0
         var longitude = 0.0
+
 
         locationCallback = object  : LocationCallback(){
             override fun onLocationResult(p0: LocationResult) {
@@ -100,7 +104,6 @@ class CriarIrregularidade : AppCompatActivity() {
         /**Guarda o tipo de irregularidade*/
         var tipo = ""
 
-        var image_name = ""
 
         val btnUpload = findViewById<Button>(R.id.upload)
 
@@ -133,15 +136,12 @@ class CriarIrregularidade : AppCompatActivity() {
             Log.d("MARIA",latitude.toString())
             Log.d("MARIA",longitude.toString())
 
-            var image_name = "teste"
-
-            Log.d("MARIA", image_name)
 
             var nome = nomeText.text.toString()
             var descricao = descText.text.toString()
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.adicionaIrregularidade(nome,descricao,tipo,latitude,longitude,idUtilizador)
+            val call = request.adicionaIrregularidade(nome,descricao,tipo,latitude,longitude,imagem64,idUtilizador)
 
             call.enqueue(object : Callback<Irregularidade> {
 
@@ -228,6 +228,8 @@ class CriarIrregularidade : AppCompatActivity() {
 
     /**Obtém a foto e coloca-a no ImageView*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        var bitmap : Bitmap
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == IMG_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
@@ -235,30 +237,18 @@ class CriarIrregularidade : AppCompatActivity() {
             img.setImageURI(data.data) // handle chosen image
 
 
+            bitmap = (img.drawable as BitmapDrawable).bitmap  // passar para bitmap
+
+            //Passa para base 64
+
+            val ByteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ByteArrayOutputStream)
+            val imgByte = ByteArrayOutputStream.toByteArray()
+            val encodedImage = Base64.encodeToString(imgByte, Base64.DEFAULT)
+            imagem64 = encodedImage
+
         }
 
     }
-
-    private fun imageToFile(nomeFicheiro: String,bitmap: Bitmap): File {
-
-        //create a file to write bitmap data
-        val f = File(this@CriarIrregularidade.cacheDir, nomeFicheiro);
-        f.createNewFile();
-
-        //Convert bitmap to byte array
-        val ByteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, ByteArrayOutputStream)
-        val imgByte = ByteArrayOutputStream.toByteArray()
-
-
-        //write the bytes in file
-        val fos = FileOutputStream(f);
-        fos.write(imgByte);
-        fos.flush();
-        fos.close();
-
-    return f
-    }
-
 
 }

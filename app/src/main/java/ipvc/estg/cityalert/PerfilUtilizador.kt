@@ -118,6 +118,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
             override fun onFailure(call: Call<List<Irregularidade>>, t: Throwable) {
                 Log.d("ERRO", "Erro ao carregar irregularidades")
+                Log.d("ERRO", t.toString())
             }
 
 
@@ -144,8 +145,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
 
         //mMap.addMarker(MarkerOptions().position(portugal).title("Marker in Portugal"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
-        //googleMap.setOnInfoWindowClickListener(this)
         mMap.setInfoWindowAdapter(InfoWindowAdapter(this))
+
     }
 
     override fun onBackPressed() {
@@ -155,19 +156,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                 .show()
     }
 
-    /*
-    override fun onInfoWindowClick(p0: Marker?) {
 
-        if (p0 != null) {
-            if (p0.isInfoWindowShown()) {
-                p0.hideInfoWindow();
-            } else {
-                p0.showInfoWindow();
-            }
-        } else {
-            Log.d("MARIA", "cenas")
-        }
-    }*/
 
 
 

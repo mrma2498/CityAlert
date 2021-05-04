@@ -3,11 +3,12 @@ package ipvc.estg.cityalert
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.ColorSpace.get
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
@@ -52,4 +53,6 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         getInfo(m, mWindow)
         return mWindow
     }
+
+
 }
