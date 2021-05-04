@@ -28,4 +28,7 @@
     <string name="create">Add</string>
     <string name="upload">Upload Image</string>
     <string name="cords">Coordinates:</string>
+    <string name="show">Show</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

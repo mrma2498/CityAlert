@@ -19,8 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CityAlert"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CriarIrregularidade"></activity>
-
+        <activity android:name=".verIrregularidade"></activity>
+        <activity android:name=".CriarIrregularidade" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -36,7 +36,6 @@
         <activity
             android:name=".PerfilUtilizador"
             android:label="@string/title_activity_perfil_utilizador" />
-
         <activity android:name=".Login" />
         <activity android:name=".PaginaInicial">
             <intent-filter>

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.MediaStore.Video.VideoColumns.CATEGORY
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -25,13 +26,28 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
+
+class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var mMap: GoogleMap
     private val PaginaINICIAL = 6
     private lateinit var irregularidades: List<Irregularidade>
     private val NotesRequestActivity = 9
     private val NovaIrregularidadeRequestActivity = 10
+    private val verIrregularidadeREQUESTCODE = 15
+
+    lateinit var position: LatLng
+
+    /**Guarda a id do utilizador que registou a irregularidade*/
+    var idUtilizadorIrr: Int = 0
+
+    var idIrregularidade: Int = 0
+
+    var nome: String = ""
+    var descricao: String = ""
+    var tipo: String = ""
+    var image_url = ""
+    var titulo = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,10 +99,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
          * */
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getIrregularidades()
-        var position: LatLng
 
-        /**Guarda a id do utilizador que registou a irregularidade*/
-        var idUtilizadorIrr: Int
+
 
 
         /**Obtém o valor da ID do utilizador autenticado*/
@@ -102,9 +116,15 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                     for (ir in irregularidades) {
                         position = LatLng(ir.latitude, ir.longitude)
                         idUtilizadorIrr = ir.id_utilizador;
+                        idIrregularidade=ir.id
+                        nome=ir.nome
+                        descricao=ir.descricao
+                        tipo=ir.tipo
+                        //image_url=ir.image_url
+
                         //Log.d("MARIA","$idUtilizadorIrr e $idLogin");
 
-                        var info = "Descrição: " + ir.descricao + "\n" + "Tipo: " + ir.tipo + "\n" + "ID_Utilizador: " + ir.id_utilizador + "\n" + ir.image_url
+                        var info = "Descrição: " + descricao + "\n" + "Tipo: " + tipo + "\n" + "ID_Utilizador: " + idUtilizadorIrr + "\n" + ir.image_url + "\n" + idIrregularidade
 
                         if (idLogin == idUtilizadorIrr) {
                             mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome).snippet(info))
@@ -147,6 +167,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
         mMap.setInfoWindowAdapter(InfoWindowAdapter(this))
 
+        googleMap.setOnInfoWindowClickListener(this)
+
     }
 
     override fun onBackPressed() {
@@ -156,8 +178,21 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback {
                 .show()
     }
 
+    override fun onInfoWindowClick(p0: Marker?) {
 
+        val intent = Intent(this@PerfilUtilizador, verIrregularidade::class.java)
 
+        intent.putExtra("id",idIrregularidade)
+        intent.putExtra("nome",nome)
+        intent.putExtra("descricao",descricao )
+        intent.putExtra("tipo",tipo)
+        intent.putExtra("latitude",position.latitude)
+        intent.putExtra("longitude",position.longitude)
+
+        //Criar intent para a imagem
+
+        startActivityForResult(intent, verIrregularidadeREQUESTCODE)
+    }
 
 
 }

@@ -1,0 +1,188 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".verIrregularidade"
+    android:id="@+id/verIrregularidade">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/nometxview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/nomeIr"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/nomeT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18dp"
+                    android:layout_toRightOf="@id/nometxview"/>
+
+
+
+            <TextView
+                android:id="@+id/descview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="35dp"
+                android:text="@string/description"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@id/nometxview"/>
+
+                <TextView
+                    android:id="@+id/desT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="15dp"
+
+                    android:layout_below="@id/descview"/>
+
+
+
+
+                <TextView
+                android:id="@+id/tipoview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/type"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@id/desT"/>
+
+                <TextView
+                    android:id="@+id/tipoT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="40dp"
+                    android:textSize="18dp"
+                    android:layout_below="@id/desT"
+                    android:layout_toRightOf="@id/tipoview"
+                   />
+
+
+
+            <TextView
+                android:id="@+id/coordenadasview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:text="@string/cords"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@id/tipoview"/>
+
+            <TextView
+                android:id="@+id/latitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Latitude"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@id/coordenadasview"/>
+
+                <TextView
+                    android:id="@+id/latitudeT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18dp"
+                    android:layout_below="@id/coordenadasview"
+                    android:layout_toRightOf="@id/latitude"
+                    />
+
+            <TextView
+                android:id="@+id/longitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Longitude"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@id/latitude"
+                />
+
+                <TextView
+                    android:id="@+id/longitudeT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="18dp"
+                    android:layout_below="@id/latitudeT"
+                    android:layout_toRightOf="@id/longitude"
+                    />
+
+
+
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:backgroundTint="#FCA656"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="10dp"
+                />
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:backgroundTint="#FCA656"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                />
+          </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+</RelativeLayout>

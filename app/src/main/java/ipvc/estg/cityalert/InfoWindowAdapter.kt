@@ -18,6 +18,7 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
 
     var mWindow = (context as Activity).layoutInflater.inflate(R.layout.info_window, null)
 
+
     private fun getInfo(marker: Marker, view: View){
 
         val title = view.findViewById<TextView>(R.id.title)
@@ -30,6 +31,8 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
 
         var descricaoIr = info[0] + "\n" + info[1] +  "\n" + info[2]
 
+        /**Guarda a id da irregularidade*/
+        var idIrregularidade = info[4]
 
         val imageUrl = "https://cityalertcm.000webhostapp.com/myslim/api/"+info[3]
 
@@ -40,7 +43,6 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
 
         //Utiliza a libraria Picasso para obter a imagem da irregularidade
         Picasso.get().load(imageUrl).resize(800,600).into(image)
-
 
     }
 
@@ -53,6 +55,8 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         getInfo(m, mWindow)
         return mWindow
     }
+
+
 
 
 }

@@ -29,4 +29,7 @@
     <string name="create">Criar</string>
     <string name="upload">Carregar Imagem</string>
     <string name="cords">Coordenadas:</string>
+    <string name="show">Ver</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Eliminar</string>
 </resources>
