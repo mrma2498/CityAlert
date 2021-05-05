@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.add_new_note.*
+
 
 class AdicionaNota : AppCompatActivity() {
 
@@ -19,7 +19,7 @@ class AdicionaNota : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_new_note)
+        setContentView(R.layout.activity_add_new_note)
 
         addTitleView = findViewById(R.id.addTitle)
         addDesView = findViewById(R.id.addDescription)

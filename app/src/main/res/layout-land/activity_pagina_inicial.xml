@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue_background"
+    tools:context=".PaginaInicial"
+    android:id="@+id/paginaInicial">
+
+
+
+    <ImageView
+        android:id="@+id/cityAlertImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="100dp"
+        android:scaleX="2.5"
+        android:scaleY="2.5"
+        android:layout_marginLeft="120dp"
+
+        app:srcCompat="@mipmap/ic_cityalert_foreground" />
+
+    <Button
+        android:id="@+id/loginB"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/loginB"
+        android:backgroundTint="#FCA656"
+        android:layout_toRightOf="@id/cityAlertImage"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="100dp"
+
+        />
+
+    <Button
+        android:id="@+id/notespage"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/notes"
+        android:backgroundTint="#FCA656"
+        android:layout_below="@+id/loginB"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/cityAlertImage"
+        android:layout_marginLeft="200dp"
+
+
+        />
+
+
+</RelativeLayout>

@@ -12,7 +12,7 @@ import ipvc.estg.cityalert.api.EliminarIrr
 import ipvc.estg.cityalert.api.EndPoints
 import ipvc.estg.cityalert.api.ServiceBuilder
 import kotlinx.android.synthetic.main.activity_editar_irregularidade.*
-import kotlinx.android.synthetic.main.add_new_note.*
+import kotlinx.android.synthetic.main.activity_add_new_note.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
