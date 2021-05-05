@@ -149,19 +149,15 @@ class CriarIrregularidade : AppCompatActivity() {
                     //Adicionar mandar para atividade para o mapa
                     if (response.isSuccessful) {
 
-                        val snackbarSuccess = findViewById<View>(R.id.criarirregularidade)
+                        val intent = Intent(this@CriarIrregularidade, PerfilUtilizador::class.java)
+                        startActivity(intent)
 
-                        Snackbar.make(snackbarSuccess, "Adicionado com sucessso!", Snackbar.LENGTH_SHORT)
-                            .show()
-
-                        //Adicionar temporizador para dar tempo para ver o adicionado com sucesso
-                        finish()
-                        //Recarregar mapa
+                        Log.d("MARIA","Adicionado com sucesso!")
                     }
                 }
 
                 override fun onFailure(call: Call<Irregularidade>, t: Throwable) {
-                    Log.d("MARIA","Falhou adicionar")
+                    Log.d("MARIA",t.toString())
                 }
             })
 

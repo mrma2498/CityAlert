@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CityAlert"
         android:usesCleartextTraffic="true">
-        <activity android:name=".verIrregularidade"></activity>
+        <activity android:name=".EditarIrregularidade"></activity>
+        <activity android:name=".verIrregularidade" />
         <activity android:name=".CriarIrregularidade" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

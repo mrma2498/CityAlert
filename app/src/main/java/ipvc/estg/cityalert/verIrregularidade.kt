@@ -1,5 +1,6 @@
 package ipvc.estg.cityalert
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class verIrregularidade : AppCompatActivity() {
+
+    private val EditarREQUEST = 20
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,9 +69,13 @@ class verIrregularidade : AppCompatActivity() {
 
                     if (response.isSuccessful) {
 
+
+
+                        val intent = Intent(this@verIrregularidade, PerfilUtilizador::class.java)
+                        startActivity(intent)
+
                         Log.d("MARIA","Eliminado com sucesso!")
-                        finish()
-                        //Recarregar mapa
+
 
                     }
                 }
@@ -81,6 +88,25 @@ class verIrregularidade : AppCompatActivity() {
 
 
 
+        }
+
+
+
+        editButton.setOnClickListener {
+
+            val intent = Intent(this@verIrregularidade, EditarIrregularidade::class.java)
+
+            intent.putExtra("id",id) //Int
+            intent.putExtra("nome",nome)
+            intent.putExtra("descricao",desc)
+            intent.putExtra("tipo",tipo)
+            intent.putExtra("latitude",lat)
+            intent.putExtra("longitude",long)
+
+
+
+            //Criar intent para a imagem
+            startActivity(intent)
         }
     }
 

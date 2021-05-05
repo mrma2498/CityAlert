@@ -35,4 +35,14 @@ interface EndPoints {
     fun eliminaIrregularidade(
         @Field("id") id: Int): Call<EliminarIrr>
 
+    @FormUrlEncoded
+    @POST("myslim/api/update")
+    fun editaIrregularidade(
+        @Field("id") id: Int,
+        @Field("nome") nome: String,
+        @Field("descricao") descricao: String,
+        @Field("tipo") tipo: String
+        ): Call<EditaIrr>
+
+
 }
