@@ -36,4 +36,5 @@
     <string name="defeitos">Defects</string>
     <string name="outros">Others</string>
     <string name="todos">All</string>
+    <string name="logout2">You have to logout!</string>
 </resources>

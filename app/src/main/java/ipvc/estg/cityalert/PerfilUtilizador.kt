@@ -208,7 +208,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
     override fun onBackPressed() {
 
         val snackbarBack = findViewById<View>(R.id.perfilutilizador)
-        Snackbar.make(snackbarBack, "You have to logout!", Snackbar.LENGTH_SHORT) //Criar string
+        Snackbar.make(snackbarBack, R.string.logout2, Snackbar.LENGTH_SHORT)
                 .show()
     }
 
@@ -500,7 +500,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
 
 
 
-    fun calculaDistancia(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float{
+    private fun calculaDistancia(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float{
         val results = FloatArray(1)
         Location.distanceBetween(lat1,lng1,lat2,lng2,results)
         return results[0]
