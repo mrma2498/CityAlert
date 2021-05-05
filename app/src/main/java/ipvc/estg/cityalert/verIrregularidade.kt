@@ -3,8 +3,6 @@ package ipvc.estg.cityalert
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Toast
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.snackbar.Snackbar
 import ipvc.estg.cityalert.api.EliminarIrr
@@ -18,20 +16,33 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class verIrregularidade : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ver_irregularidade)
 
-        var nome = intent.getStringExtra("nome")
-        var desc = intent.getStringExtra("descricao")
-        var tipo = intent.getStringExtra("tipo")
-        var lat = intent.getDoubleExtra("latitude",0.0)
-        var long = intent.getDoubleExtra("longitude",0.0)
+        val nome = intent.getStringExtra("nome")
+        val desc = intent.getStringExtra("descricao")
+        val tipo = intent.getStringExtra("tipo")
+        val lat = intent.getStringExtra("latitude")
+        val long = intent.getStringExtra("longitude")
 
-        val idIrregularidade = intent.getIntExtra("id",0)
+        val idIrregularidade = intent.getStringExtra("id")
+        val id: Int? = idIrregularidade!!.toInt()
+
+        val idUtilizador = intent.getStringExtra("idUtilizador")
+        val idUti: Int? = idUtilizador!!.toInt()
+
+        val idLogin= intent.getIntExtra("idLogin",0)
+
+        /**O botão só fica ativado se id do utilizador que criou a irregularidade foi igual à id do utilizador autenticado */
+        if(idLogin != idUti){
+            deleteButton.isEnabled=false
+            editButton.isEnabled=false
+        }
 
 
-        //Mostrar coordenadas
         //Mostrar foto
 
         //Reportado por:
@@ -42,11 +53,12 @@ class verIrregularidade : AppCompatActivity() {
         latitudeT.text = lat.toString()
         longitudeT.text = long.toString()
 
+
         deleteButton.setOnClickListener {
 
-            val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.eliminaIrregularidade(idIrregularidade)
 
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.eliminaIrregularidade(id!!)
             call.enqueue(object : Callback<EliminarIrr> {
 
 
@@ -71,4 +83,12 @@ class verIrregularidade : AppCompatActivity() {
 
         }
     }
+
+    //Verificar se faz falta
+    override fun onBackPressed() {
+
+        finish()
+
+    }
+
 }

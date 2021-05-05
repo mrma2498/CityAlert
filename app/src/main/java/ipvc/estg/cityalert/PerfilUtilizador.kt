@@ -43,11 +43,9 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
 
     var idIrregularidade: Int = 0
 
-    var nome: String = ""
-    var descricao: String = ""
-    var tipo: String = ""
-    var image_url = ""
-    var titulo = ""
+    var idLogin: Int = 0
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +102,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
 
 
         /**Obtém o valor da ID do utilizador autenticado*/
-        var idLogin = sharedPref.getInt("idUti", 0);
+        idLogin = sharedPref.getInt("idUti", 0);
 
 
         call.enqueue(object : Callback<List<Irregularidade>> {
@@ -117,14 +115,10 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
                         position = LatLng(ir.latitude, ir.longitude)
                         idUtilizadorIrr = ir.id_utilizador;
                         idIrregularidade=ir.id
-                        nome=ir.nome
-                        descricao=ir.descricao
-                        tipo=ir.tipo
-                        //image_url=ir.image_url
 
                         //Log.d("MARIA","$idUtilizadorIrr e $idLogin");
 
-                        var info = "Descrição: " + descricao + "\n" + "Tipo: " + tipo + "\n" + "ID_Utilizador: " + idUtilizadorIrr + "\n" + ir.image_url + "\n" + idIrregularidade
+                        var info = ir.descricao + "\n" + ir.tipo + "\n" + ir.id_utilizador + "\n" + ir.image_url + "\n" + ir.id + "\n" + position.latitude + "\n" + position.longitude
 
                         if (idLogin == idUtilizadorIrr) {
                             mMap.addMarker(MarkerOptions().position(position).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).title(ir.nome).snippet(info))
@@ -178,20 +172,40 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
                 .show()
     }
 
-    override fun onInfoWindowClick(p0: Marker?) {
+    override fun onInfoWindowClick(p0: Marker) {
+
+        val title = p0.title
+
+        val info = p0.snippet.split("\n").toTypedArray()
+        val descricao = info[0]
+        val tipo = info[1]
+
+        val idUtilizador = info[2]
+
+        /**Guarda a id da irregularidade*/
+        val idIrregularidade = info[4]
+
+        //val imageUrl = "https://cityalertcm.000webhostapp.com/myslim/api/"+info[3]
+
+        val lat = info[5]
+        val long = info[6]
+
 
         val intent = Intent(this@PerfilUtilizador, verIrregularidade::class.java)
 
         intent.putExtra("id",idIrregularidade)
-        intent.putExtra("nome",nome)
-        intent.putExtra("descricao",descricao )
+        intent.putExtra("nome",title)
+        intent.putExtra("descricao",descricao)
         intent.putExtra("tipo",tipo)
-        intent.putExtra("latitude",position.latitude)
-        intent.putExtra("longitude",position.longitude)
+        intent.putExtra("latitude",lat)
+        intent.putExtra("longitude",long)
+        intent.putExtra("idUtilizador",idUtilizador)
+        intent.putExtra("idLogin",idLogin)
+
+
 
         //Criar intent para a imagem
-
-        startActivityForResult(intent, verIrregularidadeREQUESTCODE)
+        startActivity(intent)
     }
 
 
