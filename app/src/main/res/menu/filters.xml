@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/obras"
+        android:title="@string/obras"/>
+
+    <item
+            android:id="@+id/acidentes"
+            android:title="@string/acidentes"/>
+
+    <item
+        android:id="@+id/defeitos"
+        android:title="@string/defeitos"/>
+
+    <item
+        android:id="@+id/outros"
+        android:title="@string/outros"/>
+
+    <item
+        android:id="@+id/raio5km"
+        android:title="5 Km"/>
+
+    <item
+        android:id="@+id/raio10km"
+        android:title="10 Km"/>
+
+
+    <item
+        android:id="@+id/todos"
+        android:title="@string/todos"/>
+
+</menu>

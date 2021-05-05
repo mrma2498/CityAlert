@@ -31,4 +31,9 @@
     <string name="show">Show</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="obras">Constructions</string>
+    <string name="acidentes">Accidents</string>
+    <string name="defeitos">Defects</string>
+    <string name="outros">Others</string>
+    <string name="todos">All</string>
 </resources>
