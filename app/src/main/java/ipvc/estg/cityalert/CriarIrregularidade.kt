@@ -146,7 +146,7 @@ class CriarIrregularidade : AppCompatActivity() {
             call.enqueue(object : Callback<Irregularidade> {
 
                 override fun onResponse(call: Call<Irregularidade>, response: Response<Irregularidade>) {
-                    //Adicionar mandar para atividade para o mapa
+
                     if (response.isSuccessful) {
 
                         val intent = Intent(this@CriarIrregularidade, PerfilUtilizador::class.java)
