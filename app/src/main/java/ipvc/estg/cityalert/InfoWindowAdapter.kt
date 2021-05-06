@@ -29,7 +29,7 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         //Divide o snippet para obter a imagem
         val info = marker.snippet.split("\n").toTypedArray()
 
-        var descricaoIr = info[0] + "\n" + info[1] +  "\n" + info[2]
+        var tipo = info[1]
 
         /**Guarda a id da irregularidade*/
         var idIrregularidade = info[4]
@@ -39,7 +39,7 @@ class InfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
 
 
         title.text = marker.title
-        snippet.text = descricaoIr
+        snippet.text = tipo
 
         //Utiliza a libraria Picasso para obter a imagem da irregularidade
         Picasso.get().load(imageUrl).resize(800,600).into(image)

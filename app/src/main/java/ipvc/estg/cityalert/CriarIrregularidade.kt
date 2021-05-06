@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -133,36 +134,57 @@ class CriarIrregularidade : AppCompatActivity() {
 
         btnAdd.setOnClickListener {
 
-            Log.d("MARIA",latitude.toString())
-            Log.d("MARIA",longitude.toString())
+
+            if (TextUtils.isEmpty(nomeText.text) || TextUtils.isEmpty(descText.text)){
 
 
-            var nome = nomeText.text.toString()
-            var descricao = descText.text.toString()
+                if (TextUtils.isEmpty(nomeText.text) && TextUtils.isEmpty(descText.text)) {
+                    nomeText.error = resources.getString(R.string.empty);
+                    descText.error = resources.getString(R.string.empty);
 
-            val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.adicionaIrregularidade(nome,descricao,tipo,latitude,longitude,imagem64,idUtilizador)
+                }
 
-            call.enqueue(object : Callback<Irregularidade> {
+                else if (TextUtils.isEmpty(nomeText.text)){
+                    nomeText.error = resources.getString(R.string.empty);
+                }
 
-                override fun onResponse(call: Call<Irregularidade>, response: Response<Irregularidade>) {
+                else if (TextUtils.isEmpty(descText.text)){
+                    descText.error = resources.getString(R.string.empty);
+                }
 
-                    if (response.isSuccessful) {
 
-                        val intent = Intent(this@CriarIrregularidade, PerfilUtilizador::class.java)
-                        startActivity(intent)
+            } else {
 
-                        Log.d("MARIA","Adicionado com sucesso!")
+                Log.d("MARIA", latitude.toString())
+                Log.d("MARIA", longitude.toString())
+
+
+                var nome = nomeText.text.toString()
+                var descricao = descText.text.toString()
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.adicionaIrregularidade(nome, descricao, tipo, latitude, longitude, imagem64, idUtilizador)
+
+                call.enqueue(object : Callback<Irregularidade> {
+
+                    override fun onResponse(call: Call<Irregularidade>, response: Response<Irregularidade>) {
+
+                        if (response.isSuccessful) {
+
+                            val intent = Intent(this@CriarIrregularidade, PerfilUtilizador::class.java)
+                            startActivity(intent)
+
+                            Log.d("MARIA", "Adicionado com sucesso!")
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<Irregularidade>, t: Throwable) {
-                    Log.d("MARIA",t.toString())
-                }
-            })
-
+                    override fun onFailure(call: Call<Irregularidade>, t: Throwable) {
+                        Log.d("MARIA", t.toString())
+                    }
+                })
 
 
+            }
         }
 
 
@@ -246,6 +268,8 @@ class CriarIrregularidade : AppCompatActivity() {
             val imgByte = ByteArrayOutputStream.toByteArray()
             val encodedImage = Base64.encodeToString(imgByte, Base64.DEFAULT)
             imagem64 = encodedImage
+
+
 
         }
 

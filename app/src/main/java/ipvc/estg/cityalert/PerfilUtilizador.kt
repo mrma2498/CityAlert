@@ -202,10 +202,13 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val portugal = LatLng(39.557191, -7.8536599)
+        val portugal = LatLng(41.6946, -8.0000)
 
         //mMap.addMarker(MarkerOptions().position(portugal).title("Marker in Portugal"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(portugal))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(portugal,8.0f))
+
+
+
         mMap.setInfoWindowAdapter(InfoWindowAdapter(this))
 
         googleMap.setOnInfoWindowClickListener(this)

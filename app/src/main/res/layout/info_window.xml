@@ -30,6 +30,7 @@
             android:maxLines="10"
             android:textSize="14sp"
             android:textColor="#000"
+            android:layout_marginTop="5dp"
             android:id="@+id/snippet"/>
 
         <ImageView
@@ -37,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             />
 
     </LinearLayout>

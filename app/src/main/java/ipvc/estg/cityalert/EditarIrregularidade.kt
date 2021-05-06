@@ -3,16 +3,15 @@ package ipvc.estg.cityalert
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import ipvc.estg.cityalert.api.EditaIrr
-import ipvc.estg.cityalert.api.EliminarIrr
 import ipvc.estg.cityalert.api.EndPoints
 import ipvc.estg.cityalert.api.ServiceBuilder
 import kotlinx.android.synthetic.main.activity_editar_irregularidade.*
-import kotlinx.android.synthetic.main.activity_add_new_note.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,21 +74,40 @@ class EditarIrregularidade : AppCompatActivity() {
                 1 -> tipo = "Acidente"
                 2 -> tipo = "Defeitos"
                 3 -> tipo = "Outros"
-                else -> {
-                    tipo = ""
-                }
-
             }
+            tipoIr = tipo
 
         }
 
 
 
+
+
         btnEdit.setOnClickListener {
+
+            if (TextUtils.isEmpty(nomeIr.text) || TextUtils.isEmpty(descricao.text)){
+
+
+                if (TextUtils.isEmpty(nomeIr.text) && TextUtils.isEmpty(descricao.text)) {
+                    nomeIr.error = resources.getString(R.string.empty);
+                    descricao.error = resources.getString(R.string.empty);
+
+                }
+
+                else if (TextUtils.isEmpty(nomeIr.text)){
+                    nomeIr.error = resources.getString(R.string.empty);
+                }
+
+                else if (TextUtils.isEmpty(descricao.text)){
+                    descricao.error = resources.getString(R.string.empty);
+                }
+
+
+            } else {
 
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.editaIrregularidade(id,nomeIr.text.toString(),descricaoIr.text.toString(),tipo)
+            val call = request.editaIrregularidade(id,nomeIr.text.toString(),descricaoIr.text.toString(),tipoIr)
 
             call.enqueue(object : Callback<EditaIrr> {
 
@@ -114,6 +132,7 @@ class EditarIrregularidade : AppCompatActivity() {
 
             })
 
+        }
         }
     }
 }
