@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -67,6 +68,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+
 
 
         //recycler view
@@ -241,7 +244,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
             if ((xDif > shakeThreshold && yDif > shakeThreshold) || (xDif > shakeThreshold && zDif > shakeThreshold)
                     || (yDif > shakeThreshold && zDif > shakeThreshold)){
-                Log.d("MARIA","Vibra")
+
+                Log.d("MARIA","Shake Phone")
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle(R.string.dialogtitle)
                 builder.setMessage(R.string.dialogconfirm)

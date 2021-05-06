@@ -44,6 +44,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
     private val NovaIrregularidadeRequestActivity = 10
     private val verIrregularidadeREQUESTCODE = 15
 
+
     lateinit var position: LatLng
 
     lateinit var loc: LatLng
