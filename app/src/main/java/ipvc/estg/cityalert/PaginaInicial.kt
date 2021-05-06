@@ -85,8 +85,7 @@ class PaginaInicial : AppCompatActivity(), SensorEventListener {
         // Many sensors return 3 values, one for each axis.
         val lux = event.values[0]
         // Do something with this sensor value.
-
-
+        
         val botaoLogin = findViewById<Button>(R.id.loginB)
         val botaoNotas = findViewById<Button>(R.id.notespage)
 

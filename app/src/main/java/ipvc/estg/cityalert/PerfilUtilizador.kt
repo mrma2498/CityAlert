@@ -6,8 +6,10 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.hardware.*
 import android.location.Geocoder
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -62,6 +64,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_perfil_utilizador)
@@ -69,6 +73,8 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
 
 
 
@@ -527,6 +533,7 @@ class PerfilUtilizador : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnIn
     override fun onPause() {
         super.onPause()
         fusedLocationClient.removeLocationUpdates(locationCallback)
+
 
     }
 

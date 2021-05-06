@@ -4,8 +4,13 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -22,9 +27,10 @@ import ipvc.estg.cityalert.entities.Nota
 import ipvc.estg.cityalert.viewModel.NotaViewModel
 import kotlinx.android.synthetic.main.activity_edita_nota.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.abs
 import kotlin.system.measureNanoTime
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var noteViewModel: NotaViewModel
 
@@ -34,11 +40,34 @@ class MainActivity : AppCompatActivity() {
     private val editNoteActivityRequestCode = 2
 
 
+    private lateinit var sensorManager: SensorManager
+    var sensor: Sensor? = null
+
+
+    var currentX: Float = 0.0F
+    var currentY: Float = 0.0F
+    var currentZ: Float = 0.0F
+
+    var lastX: Float = 0.0F
+    var lastY: Float = 0.0F
+    var lastZ: Float = 0.0F
+
+    var itIsNotFirstTime: Boolean = false
+
+    var xDif: Float = 0.0F
+    var yDif: Float = 0.0F
+    var zDif: Float = 0.0F
+
+    var shakeThreshold: Float = 5f
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
 
         //recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
@@ -189,7 +218,61 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        //
+    }
 
+
+    override fun onSensorChanged(event: SensorEvent) {
+        // In this example, alpha is calculated as t / (t + dT),
+        // where t is the low-pass filter's time-constant and
+        // dT is the event delivery rate.
+
+
+        currentX = event.values[0]
+        currentY = event.values[1]
+        currentZ = event.values[2]
+
+
+        if (itIsNotFirstTime){
+            xDif = abs(lastX - currentX)
+            yDif = abs(lastY - currentY)
+            zDif = abs(lastZ - currentZ)
+
+            if ((xDif > shakeThreshold && yDif > shakeThreshold) || (xDif > shakeThreshold && zDif > shakeThreshold)
+                    || (yDif > shakeThreshold && zDif > shakeThreshold)){
+                Log.d("MARIA","Vibra")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(R.string.dialogtitle)
+                builder.setMessage(R.string.dialogconfirm)
+
+
+                builder.setPositiveButton(R.string.conf) { dialog, which ->
+                    noteViewModel.deleteAll()
+                }
+                builder.setNegativeButton(R.string.cancel) { dialog, which ->
+                }
+                builder.show()
+
+            }
+        }
+        lastX = currentX
+        lastY = currentX
+        lastZ = currentZ
+        itIsNotFirstTime = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensor?.also { move ->
+            sensorManager.registerListener(this, move, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+    }
 
 }
 
